@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Image Sharing</string>
+    <string name="image_stub_title">Loading title...</string>
+    <string name="image_stub_location">Loading location...</string>
+</resources>
