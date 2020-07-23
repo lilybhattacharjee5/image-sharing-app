@@ -2,4 +2,5 @@
 <resources>
     <dimen name="imageCard_padding">10dp</dimen>
     <dimen name="imageCardElement_marginBottom">5dp</dimen>
+    <dimen name="imageCard_image_maxHeight">70dp</dimen>
 </resources>
