@@ -8,10 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var imageRecyclerView: RecyclerView
@@ -22,130 +23,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // hardcode for now
-        val imageDataset = listOf(
-            ImageViewModel.ImageData(
-                0,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "hi",
-                "hi",
-                "hi"
-            ),
-            ImageViewModel.ImageData(
-                1,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "bye",
-                "bye",
-                "bye"
-            ),
-            ImageViewModel.ImageData(
-                0,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "hi",
-                "hi",
-                "hi"
-            ),
-            ImageViewModel.ImageData(
-                1,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "bye",
-                "bye",
-                "bye"
-            ),
-            ImageViewModel.ImageData(
-                0,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "hi",
-                "hi",
-                "hi"
-            ),
-            ImageViewModel.ImageData(
-                1,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "bye",
-                "bye",
-                "bye"
-            ),
-            ImageViewModel.ImageData(
-                0,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "hi",
-                "hi",
-                "hi"
-            ),
-            ImageViewModel.ImageData(
-                1,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "bye",
-                "bye",
-                "bye"
-            ),
-            ImageViewModel.ImageData(
-                0,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "hi",
-                "hi",
-                "hi"
-            ),
-            ImageViewModel.ImageData(
-                1,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "bye",
-                "bye",
-                "bye"
-            ),
-            ImageViewModel.ImageData(
-                0,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "hi",
-                "hi",
-                "hi"
-            ),
-            ImageViewModel.ImageData(
-                1,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "bye",
-                "bye",
-                "bye"
-            ),
-            ImageViewModel.ImageData(
-                0,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "hi",
-                "hi",
-                "hi"
-            ),
-            ImageViewModel.ImageData(
-                1,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "bye",
-                "bye",
-                "bye"
-            ),
-            ImageViewModel.ImageData(
-                0,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "hi",
-                "hi",
-                "hi"
-            ),
-            ImageViewModel.ImageData(
-                1,
-                "https://thumbor.forbes.com/thumbor/711x533/https://blogs-images.forbes.com/laurabegleybloom/files/2018/06/Bali-Sunset-JetsetChristina-Single-Fin-Uluwatu-Bali-1200x900.jpg",
-                "bye",
-                "bye",
-                "bye"
-            )
-        )
+        val imageDataset = mutableListOf<ImageViewModel.ImageData>()
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = ImageAdapter(this, imageDataset) // extend recycler view adapter
+
+        GlobalScope.launch {
+            val data = fetchImageDataAsync()
+            imageDataset.addAll(data)
+            runOnUiThread {
+                viewAdapter.notifyDataSetChanged()
+            }
+        }
 
         imageRecyclerView = findViewById<RecyclerView>(R.id.all_images).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
         }
+    }
+
+    fun addImageActivity(view: View) {
+        val intent = Intent(this, AddImageActivity::class.java)
+        startActivity(intent)
     }
 }
 
@@ -171,6 +71,9 @@ class ImageAdapter(private val activity: MainActivity, private val imageDataset:
         holder.itemView.setOnClickListener {
             val imageScreenIntent = Intent(activity, ImageScreenActivity::class.java)
             imageScreenIntent.putExtra("url", currImageData.url)
+            imageScreenIntent.putExtra("title", currImageData.title)
+            imageScreenIntent.putExtra("location", currImageData.location)
+            imageScreenIntent.putExtra("caption", currImageData.caption)
             activity.startActivity(imageScreenIntent)
         }
     }
